@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+    <script>
+      function addTextarea ( elem, disabled = false ) {
+        const textarea = document.createElement('textarea')
+        textarea.classList.add('column1')
+        textarea.disabled = disabled
+        elem.appendChild(textarea)
+        return textarea
+      }
+      function addDivider ( elem, text, hovertext = '' ) {
+        var divider = document.createElement('div')
+        divider.classList.add('divider')
+        divider.innerHTML = text
+        if ( hovertext !== '' )
+          divider.title = hovertext
+        elem.appendChild(divider)
+        return divider
+      }
+      document.addEventListener('DOMContentLoaded', function ( ) {
+        var input = addTextarea(editor)
+        addDivider(editor, "From Base64", "Decode Base64 to INI")
+        var base64 = addTextarea(editor)
+        input.oninput = function ( ) {
+          base64.value = atob(input.value)
+        }
+        base64.oninput = function ( ) {
+          input.value = btoa(base64.value)
+        }
+      })
+    </script>
+  </head>
+  <body>
+    <div>
+      <div id="main">
+        <div id="editor">
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
